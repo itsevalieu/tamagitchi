@@ -1,5 +1,4 @@
 # Table of contents
 
-* [Getting Started](README.md)
-* [README](client.md)
-
+- [Getting Started](README.md)
+- [How to Contribute](CONTRIBUTING.adoc)
