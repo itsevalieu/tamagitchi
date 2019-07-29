@@ -46,8 +46,12 @@ class App extends Component {
         </header>
         <main>
           <p>Plant placeholder</p>
-          <input onChange={this.handleChange} value={this.state.user} />
-          <input></input>
+          <input
+            placeholder="username"
+            onChange={this.handleChange}
+            value={this.state.user}
+          />
+          <input placeholder="repository"></input>
           <img src="/" alt="Plant" />
         </main>
         <div className="calendar">Calendar</div>
