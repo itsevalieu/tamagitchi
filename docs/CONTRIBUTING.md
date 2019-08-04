@@ -1,10 +1,9 @@
-[[how-to-contribute]]
-How to contribute
------------------
+# How to contribute
 
 [[submitting-features-or-changes]]
 Submitting features or changes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+```
 
 If you've been added as a collaborator, clone the project to your local
 machine:
@@ -26,7 +25,7 @@ naming scheme, `dash-separated-feature-title-issue-no`:
 
 ....
 git checkout dev
-git checkout -b add-logarithms-42
+git checkout -b issue#42-add-logarithms
 ....
 
 Stage and commit your changes with a present tense commit message -
@@ -41,7 +40,7 @@ git commit -m "add logarithms"
 Push new feature branch to origin:
 
 ....
-git push origin add-logarithms-42
+git push origin issue#42-add-logarithms
 ....
 
 If you already have an in-progress feature branch in origin and your
@@ -57,12 +56,12 @@ ________________________________________________________________________________
 ....
 git fetch origin
 git rebase origin/dev
-git push origin add-logarithms-42 --force-with-lease
+git push origin issue#42-add-logarithms --force-with-lease
 ....
 
 [[updating-the-origin-of-your-forked-project]]
 Updating the origin of your forked project
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 Update the origin of your forked project by first configuring a remote
 that points to the original repository which we will call `upstream`:
@@ -88,7 +87,8 @@ git push -f origin dev
 
 [[submitting-a-pull-request-pr]]
 Submitting a pull request (PR)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+```
 
 1.  Submit a PR on GitHub, by setting your feature branch as the `head`
 branch and `dev` as the `base` branch.
@@ -103,3 +103,4 @@ Coming soon...
 Continuous Integration (CI) will be setup to verify whether `dev` can be
 merged into `master`, to ensure only commits with working builds remain
 in the `master` branch.
+```
