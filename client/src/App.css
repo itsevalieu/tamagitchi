@@ -12,10 +12,29 @@ html {
 }
 body {
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+}
+input {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  width: 30%;
+  margin: 1em;
+  text-align: center;
+}
+input:focus {
+  outline: none;
+  border-bottom: 1px solid green;
+}
+span {
+  color: #ccc;
 }
 /* Header */
 header {
-  background: #ccc;
+  background: #fff;
 }
 
 /* Plant */
@@ -25,5 +44,5 @@ main {
 /* Calendar */
 
 .calendar {
-  background: #ccc;
+  background: #fff;
 }

@@ -43,15 +43,15 @@ class App extends Component {
     return (
       <Fragment>
         <header>
-          <p>Tamagitchi</p>
+          <h1>Tamagitchi</h1>
         </header>
         <main>
-          <p>Plant placeholder</p>
           <input
             placeholder="username"
             onChange={this.handleChange}
             value={this.state.user}
           />
+          <span>/</span>
           <input placeholder="repository"></input>
           <Plant />
         </main>
