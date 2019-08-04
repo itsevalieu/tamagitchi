@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import './App.css';
+import Plant from './components/Plant';
 
 class App extends Component {
   constructor() {
@@ -52,9 +53,8 @@ class App extends Component {
             value={this.state.user}
           />
           <input placeholder="repository"></input>
-          <img src="/" alt="Plant" />
+          <Plant />
         </main>
-        <div className="calendar">Calendar</div>
       </Fragment>
     );
   }
