@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import plant0 from './stages/stg0.png';
 import plant1 from './stages/stg1.png';
 import plant2 from './stages/stg2.png';
@@ -6,8 +6,8 @@ import plant3 from './stages/stg3.png';
 import plant4 from './stages/stg4.png';
 import plant5 from './stages/stg5.png';
 
-const Plant = () => {
-  const [plant, setPlant] = useState(2);
+const Plant = props => {
+  let plant = props.plant;
   switch (plant) {
     case 0:
       return (
