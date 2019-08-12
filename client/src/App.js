@@ -7,11 +7,28 @@ class App extends Component {
     super();
     this.state = {
       user: '',
-      commits: null
+      repo: '',
+      commits: null,
+      plant: 0
     };
   }
-  componentDidMount() {
-    this.fetchCommits()
+  componentDidMount() {}
+  fetchCommits = (user, repo) => {
+    let url = `https://api.github.com/repos`;
+    return fetch(`${url}/${user}/${repo}/stats/commit_activity`).then(
+      response => {
+        return response.json();
+      }
+    );
+  };
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+  handleClick = e => {
+    console.log('submitted', this.state.user, this.state.repo);
+    this.fetchCommits(this.state.user, this.state.repo)
       .then(data => {
         this.setState({
           commits: data
@@ -22,22 +39,11 @@ class App extends Component {
       .catch(error => {
         console.log('error', error);
       });
-  }
-  fetchCommits = () => {
-    let url = `https://api.github.com/repos`;
-    return fetch(`${url}/itsevalieu/home/stats/commit_activity`).then(
-      response => {
-        return response.json();
-      }
-    );
   };
-  handleChange = e => {
-    this.setState({
-      user: e.target.value
-    });
-    console.log(this.state.user);
+  setPlantState = data => {
+    let plant = 1;
+    this.setState({ plant });
   };
-
   render() {
     //if commits is empty, show username input
     return (
@@ -46,14 +52,21 @@ class App extends Component {
           <h1>Tamagitchi</h1>
         </header>
         <main>
+          <Plant plant={this.state.plant} />
           <input
             placeholder="username"
             onChange={this.handleChange}
             value={this.state.user}
+            name="user"
           />
           <span>/</span>
-          <input placeholder="repository"></input>
-          <Plant />
+          <input
+            placeholder="repository"
+            onChange={this.handleChange}
+            name="repo"
+            value={this.state.repo}
+          ></input>
+          <button onClick={this.handleClick}>Check!</button>
         </main>
       </Fragment>
     );
