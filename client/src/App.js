@@ -8,8 +8,10 @@ class App extends Component {
     this.state = {
       user: '',
       repo: '',
-      commits: null,
-      plant: 0
+      commits: [],
+      plant: '',
+      combo: 0,
+      missed: 0
     };
   }
   componentDidMount() {}
@@ -33,16 +35,27 @@ class App extends Component {
         this.setState({
           commits: data
         });
-        console.log('commits', this.state.commits);
-        console.log(this.state.commits[0]);
+        console.log('total commits', this.state.commits);
+        this.setPlantState(this.state.commits);
       })
       .catch(error => {
         console.log('error', error);
       });
   };
-  setPlantState = data => {
-    let plant = 1;
-    this.setState({ plant });
+  calculateState = () => {
+    if (this.state.combo === 0 && this.state.missed === 0) {
+      this.setState({ plant: 0 });
+    } else if (this.state.combo === 1 && this.state.missed === 0) {
+      this.setState({ plant: 1 });
+    } else if (this.state.combo > 1 && this.state.missed === 0) {
+      this.setState({ plant: 2 });
+    } else if (this.state.combo === 0 && this.state.missed === 1) {
+      this.setState({ plant: 3 });
+    } else if (this.state.combo === 0 && this.state.missed > 1) {
+      this.setState({ plant: 4 });
+    } else if (this.state.combo === 0 && this.state.missed > 3) {
+      this.setState({ plant: 5 });
+    }
   };
   render() {
     //if commits is empty, show username input
