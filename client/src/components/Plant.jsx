@@ -1,12 +1,12 @@
-import React from 'react';
-import plant0 from './stages/stg0.png';
-import plant1 from './stages/stg1.png';
-import plant2 from './stages/stg2.png';
-import plant3 from './stages/stg3.png';
-import plant4 from './stages/stg4.png';
-import plant5 from './stages/stg5.png';
+import React from "react";
+import plant0 from "./stages/stg0.png";
+import plant1 from "./stages/stg1.png";
+import plant2 from "./stages/stg2.png";
+import plant3 from "./stages/stg3.png";
+import plant4 from "./stages/stg4.png";
+import plant5 from "./stages/stg5.png";
 
-const Plant = props => {
+const Plant = (props) => {
   let plant = props.plant;
   switch (plant) {
     case 0:
@@ -43,6 +43,12 @@ const Plant = props => {
       return (
         <div>
           <img src={plant5} alt={`Plant State ${plant}`} />
+        </div>
+      );
+    default:
+      return (
+        <div>
+          <p>No plant.</p>
         </div>
       );
   }

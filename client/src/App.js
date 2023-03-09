@@ -1,89 +1,80 @@
-import React, { Component, Fragment } from 'react';
-import './App.css';
-import Plant from './components/Plant';
+import { useState } from "react";
+import "./App.css";
+import Plant from "./components/Plant";
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      user: '',
-      repo: '',
-      commits: [],
-      plant: '',
-      combo: 0,
-      missed: 0
-    };
-  }
-  componentDidMount() {}
-  fetchCommits = (user, repo) => {
+function App() {
+  const [user, setUser] = useState("");
+  const [repo, setRepo] = useState("");
+  const [commits, setCommits] = useState([]);
+  const [plant, setPlant] = useState("");
+  const [combo, setCombo] = useState(0);
+  const [missed, setMissed] = useState(0);
+
+  const fetchCommits = (user, repo) => {
     let url = `https://api.github.com/repos`;
     return fetch(`${url}/${user}/${repo}/stats/commit_activity`).then(
-      response => {
+      (response) => {
         return response.json();
       }
     );
   };
-  handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
+  const handleChange = (e) => {
+    setUser({
+      [e.target.name]: e.target.value,
     });
   };
-  handleClick = e => {
-    console.log('submitted', this.state.user, this.state.repo);
-    this.fetchCommits(this.state.user, this.state.repo)
-      .then(data => {
-        this.setState({
-          commits: data
+  const handleClick = (e) => {
+    this.fetchCommits(user, repo)
+      .then((data) => {
+        setCommits({
+          commits: data,
         });
-        console.log('total commits', this.state.commits);
-        this.setPlantState(this.state.commits);
+        console.log("total commits", commits);
+        this.setPlantState(commits);
       })
-      .catch(error => {
-        console.log('error', error);
+      .catch((error) => {
+        console.log("error", error);
       });
   };
-  calculateState = () => {
-    if (this.state.combo === 0 && this.state.missed === 0) {
+  const calculateState = () => {
+    if (combo === 0 && missed === 0) {
       this.setState({ plant: 0 });
-    } else if (this.state.combo === 1 && this.state.missed === 0) {
+    } else if (combo === 1 && missed === 0) {
       this.setState({ plant: 1 });
-    } else if (this.state.combo > 1 && this.state.missed === 0) {
+    } else if (combo > 1 && missed === 0) {
       this.setState({ plant: 2 });
-    } else if (this.state.combo === 0 && this.state.missed === 1) {
+    } else if (combo === 0 && missed === 1) {
       this.setState({ plant: 3 });
-    } else if (this.state.combo === 0 && this.state.missed > 1) {
+    } else if (combo === 0 && missed > 1) {
       this.setState({ plant: 4 });
-    } else if (this.state.combo === 0 && this.state.missed > 3) {
+    } else if (combo === 0 && missed > 3) {
       this.setState({ plant: 5 });
     }
   };
-  render() {
-    //if commits is empty, show username input
-    return (
-      <Fragment>
-        <header>
-          <h1>Tamagitchi</h1>
-        </header>
-        <main>
-          <Plant plant={this.state.plant} />
-          <input
-            placeholder="username"
-            onChange={this.handleChange}
-            value={this.state.user}
-            name="user"
-          />
-          <span>/</span>
-          <input
-            placeholder="repository"
-            onChange={this.handleChange}
-            name="repo"
-            value={this.state.repo}
-          ></input>
-          <button onClick={this.handleClick}>Check!</button>
-        </main>
-      </Fragment>
-    );
-  }
+  return (
+    <div className="App">
+      <header>
+        <h1>Tamagitchi</h1>
+      </header>
+      <main>
+        <Plant plant={plant} />
+        <input
+          placeholder="username"
+          onChange={handleChange}
+          value={user}
+          name="user"
+        />
+        <span>/</span>
+        <input
+          placeholder="repository"
+          onChange={handleChange}
+          name="repo"
+          value={repo}
+        ></input>
+        <button onClick={handleClick}>Check!</button>
+      </main>
+    </div>
+  );
 }
 
 export default App;
